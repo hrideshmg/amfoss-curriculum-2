@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3>Updating {{ todo }} from {{ todolist }}</h3>
+  <form method="post">
+    {% csrf_token %}
+
+    <table>{{ form.as_table }}</table>
+
+    <input value="Submit" type="submit" />
+
+    <input value="Cancel" type="button" onclick="location.href='{% url 'list' todolist.id %}'" />
+
+    <input value="Delete" type="button" onclick="location.href='{% url 'todo-delete' todolist.id todo.id %}'" style="background-color: red;" />
+  </form>
+{% endblock %}
