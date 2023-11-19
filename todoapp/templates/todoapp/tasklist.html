@@ -2,22 +2,25 @@
 {% block content %}
   {% if todolist %}
     <h3>All Tasks Under {{ todolist }}:</h3>
-    <ul>
-      {% for todo in todotasks %}
-        <li>
-          <div>
-            <div role="button" onclick="location.href='{% url 'task-update' todolist.id todo.id %}'">{{ todo.title }}
-              (Due {{ todo.due_date|date:'l, F j' }})</div>
-          </div>
-        </li>
-        {% empty %}
-        <p>There are no to-do items in this list.</p>
-      {% endfor %}
-      <div style="display: inline-block; margin-top: 20px;">
-        <input value="Go back" type="button" onclick="location.href='{% url 'index' %}'" />
-        <input value="Add a new item" type="button" onclick="location.href='{% url 'task-add' todolist.id %}'" />
-        <input value="Delete list" type="button" onclick="location.href='{% url 'list-delete' todolist.id %}'" style="background-color: red; display: inline-block;" />
+    {% for todo in todotasks %}
+      <div>
+        <div style="display: inline-block;">
+          {% if todo.is_completed %}
+            <input type="checkbox" style="caret-color: transparent;" checked disabled />
+          {% else %}
+            <input type="checkbox" style="caret-color: transparent;" disabled />
+          {% endif %}
+          <div style="display: inline-block;" role="button" onclick="location.href='{% url 'task-update' todolist.id todo.id %}'">{{ todo.title }}
+            (Due {{ todo.due_date|date:'l, F j' }})</div>
+        </div>
       </div>
-    </ul>
+      {% empty %}
+      <p>There are no to-do items in this list.</p>
+    {% endfor %}
+    <div style="display: inline-block; margin-top: 20px;">
+      <input value="Go back" type="button" onclick="location.href='{% url 'index' %}'" />
+      <input value="Add a new item" type="button" onclick="location.href='{% url 'task-add' todolist.id %}'" />
+      <input value="Delete list" type="button" onclick="location.href='{% url 'list-delete' todolist.id %}'" style="background-color: red; display: inline-block;" />
+    </div>
   {% endif %}
 {% endblock %}

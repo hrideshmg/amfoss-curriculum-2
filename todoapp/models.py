@@ -20,6 +20,7 @@ class ToDoTask(models.Model):
         auto_now_add=True
     )  # Auto_now_add adds the timestamp on object creation
     due_date = models.DateTimeField()
+    is_completed = models.BooleanField()
     todo_list = models.ForeignKey(ToDoList, on_delete=models.CASCADE)
 
     def get_absolute_url(self):

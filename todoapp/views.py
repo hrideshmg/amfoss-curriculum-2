@@ -46,12 +46,13 @@ class ToDoListDelete(DeleteView):
 
 class TaskCreate(CreateView):
     model = ToDoTask
-    fields = ["title", "description", "due_date", "todo_list"]
+    fields = ["title", "description", "due_date", "is_completed", "todo_list"]
     template_name = "todoapp/taskadd.html"
 
     def get_initial(self) -> dict[str, Any]:
         initial = super().get_initial()
         initial["todo_list"] = ToDoList.objects.get(id=self.kwargs["list_id"])
+        initial["is_completed"] = False
         return initial
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
@@ -69,7 +70,7 @@ class TaskCreate(CreateView):
 class TaskUpdate(UpdateView):
     model = ToDoTask
     template_name = "todoapp/taskupdate.html"
-    fields = ["title", "description", "due_date", "todo_list"]
+    fields = ["title", "description", "due_date", "is_completed", "todo_list"]
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
