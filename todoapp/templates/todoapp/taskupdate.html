@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h3>Updating {{ todo }} from {{ todolist }}</h3>
+  <h3>Updating '<i>{{ todo }}</i>' from '<i>{{ todolist }}</i>'</h3>
   <form method="post">
     {% csrf_token %}
 

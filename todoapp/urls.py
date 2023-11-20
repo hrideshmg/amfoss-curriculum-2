@@ -2,6 +2,9 @@ from django.urls import path
 from todoapp import views
 
 urlpatterns = [
+    path("login/", views.LoginForm.as_view(), name="login"),
+    path("register/", views.RegistrationForm.as_view(), name="register"),
+    path("logout/", views.LogoutForm.as_view(), name="logout"),
     path("", views.ToDoListList.as_view(), name="index"),
     path("list/<int:list_id>", views.ToDoListView.as_view(), name="list"),
     path("list/add", views.ToDoListCreate.as_view(), name="list-add"),

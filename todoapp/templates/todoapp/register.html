@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+  <form method="post" action="{% url 'register' %}">
+    {% csrf_token %}
+    <table>{{ form.as_table }}</table>
+    <input style="display: inline-block;" type="submit" value="Register" />
+    <input style="display:inline-block;" type="button" value="Login" onclick="location.href='{% url 'login' %}'" />
+  </form>
+{% endblock %}
