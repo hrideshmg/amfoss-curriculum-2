@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             model_name="todolist",
             name="user",
             field=models.ForeignKey(
-                default=User.objects.all()[1],
+                default=1,
                 on_delete=django.db.models.deletion.CASCADE,
                 to=settings.AUTH_USER_MODEL,
             ),
