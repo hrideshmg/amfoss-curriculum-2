@@ -67,6 +67,11 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     fields = ["title", "description", "due_date", "is_completed", "todo_list"]
     template_name = "todoapp/taskadd.html"
 
+    def get_form(self):
+        form = super().get_form()
+        form.fields["due_date"].widget = DateInputWidget()
+        return form
+
     def get_initial(self) -> dict[str, Any]:
         initial = super().get_initial()
         initial["todo_list"] = get_object_or_404(
